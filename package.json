@@ -10,13 +10,19 @@
     "apollo-link": "^1.2.13",
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
+    "bootstrap": "^4.4.1",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.11.0",
+    "react-particles-js": "^2.7.0",
+    "react-particles-webgl": "^1.0.10",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-    "styled-components": "^4.4.0"
+    "react-text-transition": "^1.0.2",
+    "styled-components": "^4.4.0",
+    "three": "^0.112.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
