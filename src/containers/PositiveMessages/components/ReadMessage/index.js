@@ -1,0 +1,1 @@
+// displays the list of messages the user has recieved from their friends
