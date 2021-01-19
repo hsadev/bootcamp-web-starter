@@ -10,7 +10,7 @@ export const PageContainer = styled.div`
 `
 
 export const Container = styled.div`
-  width: 50%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
