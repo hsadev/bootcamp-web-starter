@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {StyledForm, DietHealth, DietHealthContainer} from '../../styles'
+import {StyledForm, DietHealth, DietHealthContainer, Container, LoginRegisterButton} from '../../styles'
 import InputBlock from '../../components/InputBlock'
 import DietHealthBlock from '../../components/DietHealthBlock'
 
@@ -11,6 +11,8 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [confpass, setConfpass] = useState("")
+    const buttonEnabled = email.length > 0 && pass.length > 0 && confpass.length > 0
+
     const [diet, setDiet] = useState({
         "balanced": false,
         "high-protein": false,
@@ -22,10 +24,10 @@ const Register = () => {
     const [health, setHealth] = useState({
         "dairy-free": false,
         "egg-free": false,
-        "fish-free": false,
         "gluten-free": false,
         "kosher": false,
         "peanut-free": false,
+        "pescatarian": false,
         "shellfish-free": false,
         "soy-free": false,
         "tree-nut-free": false,
@@ -47,7 +49,8 @@ const Register = () => {
     }
 
     return (
-        <StyledForm onSubmit={handleSubmit}>
+        <Container>
+        <StyledForm onSubmit={handleSubmit} maxheight="730px">
             <h1>Welcome to Recipe Central</h1>
             <InputBlock 
                 label="Email" 
@@ -94,8 +97,9 @@ const Register = () => {
                     ))}
                 </DietHealth>
             </DietHealthContainer>
-            <input type='submit' value='Register' />
+            <LoginRegisterButton disabled={ !buttonEnabled } onClick={ handleSubmit }>Register</LoginRegisterButton>
         </StyledForm>
+        </Container>
     )
 }
 

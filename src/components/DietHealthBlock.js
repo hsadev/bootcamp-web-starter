@@ -1,10 +1,11 @@
 import React from 'react'
+import { DietHealthRow } from './styles'
 
 
 const DietHealthBlock = ({label, name, checked, handleCheck, key}) => {
 
     return (
-        <div>
+        <DietHealthRow>
             <label>{ label }</label>
             <input
                 type="checkbox"
@@ -12,7 +13,7 @@ const DietHealthBlock = ({label, name, checked, handleCheck, key}) => {
                 name={ name }
                 checked={ checked }
             />
-        </div>
+        </DietHealthRow>
     )
 }
 

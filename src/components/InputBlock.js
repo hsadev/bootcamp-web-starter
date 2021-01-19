@@ -1,12 +1,12 @@
 import React from 'react'
-import {StyledInput} from './styles'
+import {StyledInput, StyledLabel, TextField} from './styles'
 
 const InputBlock = ({label, type, name, onChangeF, value}) => {
 
     return (
         <StyledInput>
-            <label>{ label }</label>
-            <input 
+            <StyledLabel>{ label }</StyledLabel>
+            <TextField 
                 type={ type }
                 name={ name }
                 onChange={ onChangeF }
