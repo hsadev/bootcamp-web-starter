@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List, ListItem } from '../../styles'
+import { OList, ListItem } from '../../styles'
 
 const Steps = () => {
   const [steps, setSteps] = useState([
@@ -20,11 +20,11 @@ const Steps = () => {
   return (
     <>
       <h2>Steps</h2>
-      <List>
+      <OList>
         {steps.map(step => (
           <ListItem>{step}</ListItem>
         ))}
-      </List>
+      </OList>
     </>
   )
 }

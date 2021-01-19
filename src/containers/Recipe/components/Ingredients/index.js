@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List, ListItem } from '../../styles'
+import { UList, ListItem } from '../../styles'
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState([
@@ -12,11 +12,11 @@ const Ingredients = () => {
   return (
     <>
       <h2>Ingredients</h2>
-      <List>
+      <UList>
         {ingredients.map(ingredient => (
           <ListItem>{ingredient}</ListItem>
         ))}
-      </List>
+      </UList>
     </>
   )
 }
