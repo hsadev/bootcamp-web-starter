@@ -1,35 +1,53 @@
 import styled from 'styled-components'
 
-export const List = styled.ul`
+export const UList = styled.ul`
   list-style-type: none;
   padding: 0px;
+`
+
+export const OList = styled.ol`
+  padding: 0px;
+`
+
+export const Button = styled.button`
+`
+
+export const ButtonPanel = styled.div`
 `
 
 export const ListItem = styled.li`
   font-size: 14px;
 `
 
+export const LeftPanel = styled.div`
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+`
+
 export const Title = styled.h1`
-  grid-area: title;
-  align-self: end;
+  margin: 0px;
 `
 
 export const IngredientsContainer = styled.div`
-  grid-area: ing;
-  width: 100%;
+  border: 1px solid black;
+  width: 500px;
+  padding: 20px;
 `
 
 export const StepsContainer = styled.div`
-  grid-area: steps;
-  width: 100%;
+  border-left: 1px solid black;
+  width: 1000px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
 `
 
 export const PageContainer = styled.div`
-  display: grid;
-  grid-template-columns: 35% 65%;
-  grid-template-rows: 50% 50%;
-  grid-template-areas:
-    'title steps'
-    'ing steps';
-  gap: 0px 100px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
 `
