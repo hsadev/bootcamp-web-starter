@@ -23,9 +23,6 @@ const Login = () => {
         },
     })
 
-    window.onunhandledrejection = event => {
-        console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
-      };
 
     return (
         <Container>
