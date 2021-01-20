@@ -2,7 +2,7 @@ import React from 'react'
 
 import DetailInput from './components/DetailInput'
 
-const ItemDetails = ({ value, setValue, msg }) => {
+const ItemDetails = ({ value, setValue, msg, action }) => {
   const addTag = e => {
     if (e.key === 'Enter' && e.target.value) {
       setValue({ 
@@ -59,7 +59,7 @@ const ItemDetails = ({ value, setValue, msg }) => {
         return <p key={i}>{tag}</p>
       })}
       <br />
-      <button type='button'>{msg}</button>
+      <button type='button' onClick={action}>{msg}</button>
     </div>
   )
 }
