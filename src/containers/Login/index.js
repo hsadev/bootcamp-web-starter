@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Container, LoginRegisterButton, StyledForm} from '../../styles'
-import InputBlock from '../../components/InputBlock'
+import InputBlock from '../../components/LoginRegister/InputBlock'
 import { LOGIN } from '../graphql'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
@@ -21,7 +21,10 @@ const Login = () => {
             localStorage.setItem('token', token)
             history.push('/')
         },
+        //onError 
     })
+
+
 
 
     return (

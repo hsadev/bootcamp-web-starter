@@ -7,12 +7,16 @@ import client from './client'
 import Home from './containers/Home'
 import Register from './containers/Register'
 import Login from './containers/Login'
+import NavBar from './components/NavBar/NavBar'
 
 const App = () => (
   <Router>
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <div className="App">
+        { localStorage.getItem('token') ? 
+          <NavBar />
+        : <></> }
           <Switch>
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
