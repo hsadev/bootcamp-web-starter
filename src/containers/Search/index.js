@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
-import { Container, Row } from './styles'
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
+import { Container, Row, Items } from './styles'
+import item from '../Home/index'
 
 
-const Home = () => {
+const Search = () => {
     
     const history = useHistory()
+    const { id } = useParams()
     const[item, setItem] = useState()
-    console.log(item)
-    
+
     return (
         <Container>
-            <h1>Welcome to Marketplace!</h1>
-            <p>The one stop for all your online shopping</p>
+            <h1>Search results for: { id }</h1>
             <Row>
                 <input placeholder='Search items' value={item} onChange={e => setItem(e.target.value)} />
                 <button onClick={() => history.push(`/search/${item}`)}>Search</button>
             </Row>
+            <h5>Refine search with tags!</h5>
         </Container>
     )}
 
 
-export default Home
+export default Search
