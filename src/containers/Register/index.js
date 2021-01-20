@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {StyledForm, DietHealth, DietHealthContainer, Container, LoginRegisterButton} from '../../styles'
-import InputBlock from '../../components/InputBlock'
-import DietHealthBlock from '../../components/DietHealthBlock'
+import InputBlock from '../../components/LoginRegister/InputBlock'
+import DietHealthBlock from '../../components/LoginRegister/DietHealthBlock'
 
 // multiple dietary restrictions!!
 // diets: “balanced”, “high-protein”, “high-fiber”, “low-fat”, “low-carb”, “low-sodium”
