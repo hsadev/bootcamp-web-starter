@@ -14,9 +14,9 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <div className="App">
-        { localStorage.getItem('token') ? 
-          <NavBar />
-        : <></> }
+          { localStorage.getItem('token')
+            ? <NavBar />
+            : <></> }
           <Switch>
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
