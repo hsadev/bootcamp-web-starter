@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 const NavBar = () => {
     const history = useHistory()
+
     return (
         <NavbarContainer>
             <Title to='/'>Recipe Central</Title>
@@ -12,6 +13,7 @@ const NavBar = () => {
                 <Tab to='/favorites'>Favorites</Tab>
                 <Tab to='/history'>History</Tab>
                 <LogoutBtn onClick={ () => {
+                    localStorage.clear()
                     history.push('/login')
                 }}>Logout</LogoutBtn>
             </Links>

@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import {Container, LoginRegisterButton, StyledForm} from '../../styles'
 import InputBlock from '../../components/LoginRegister/InputBlock'
-import { LOGIN } from '../graphql'
+import { LOGIN } from './graphql'
 import { useMutation } from '@apollo/react-hooks'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
     const buttonEnabled = email.length > 0 && pass.length > 0
     
     const history = useHistory()
@@ -19,18 +20,27 @@ const Login = () => {
         onCompleted:({login: {token}}) => {
             console.log("user has been logged in")
             localStorage.setItem('token', token)
-            history.push('/')
         },
-        //onError 
+        onError: () => {
+            alert("there has been an error line 25")
+        }
     })
 
+    if (error) {
+        alert("there has been an error in logging u in line 30")
+    }
 
+    const handleLogin = (event) => {
+        login()
+        history.push('/')
+    }
 
 
     return (
         <Container>
-        <StyledForm onSubmit={ login } maxheight="400px">
+        <StyledForm onSubmit={ login }>
             <h1>Welcome back to Recipe Central</h1>
+            <p>{errorMessage} </p>
             <InputBlock 
                 label="Email" 
                 type="text" 
@@ -45,9 +55,9 @@ const Login = () => {
                 onChangeF={(e) => setPass(e.target.value)} 
                 value={pass} 
             />
-            <LoginRegisterButton disabled={ !buttonEnabled } onClick={ login }>Log In</LoginRegisterButton>
+            <LoginRegisterButton disabled={ !buttonEnabled } onClick={ handleLogin }>Log In</LoginRegisterButton>
+            <p>or <Link to="/register">Register</Link></p>
         </StyledForm>
-            {error ? <p>There was an error</p> : <p></p>}
         </Container>
     )
 }

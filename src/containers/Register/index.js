@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import {StyledForm, DietHealth, DietHealthContainer, Container, LoginRegisterButton} from '../../styles'
 import InputBlock from '../../components/LoginRegister/InputBlock'
 import DietHealthBlock from '../../components/LoginRegister/DietHealthBlock'
+import { REGISTER, ADD_DIET, ADD_HEALTH } from './graphql'
+import { useMutation } from '@apollo/react-hooks'
+import { useHistory, Link } from 'react-router-dom'
 
 // multiple dietary restrictions!!
 // diets: “balanced”, “high-protein”, “high-fiber”, “low-fat”, “low-carb”, “low-sodium”
@@ -11,6 +14,8 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [confpass, setConfpass] = useState("")
+    const [userId, setId] = useState("")
+    const [registered, setRegistered] = useState(false)
     const buttonEnabled = email.length > 0 && pass.length > 0 && confpass.length > 0
 
     const [diet, setDiet] = useState({
@@ -35,23 +40,86 @@ const Register = () => {
         "vegetarian": false,
     })
 
+    const history = useHistory()
+    const [register, {loading, error}] = useMutation(REGISTER, {
+        variables: {
+            input: {
+                email: email,
+                password: pass,
+            },
+        },
+        onCompleted:({register: {token, user: {id}}}) => {
+            setId(id)
+            console.log("user has been registered")
+            localStorage.setItem('token', token)
+            setRegistered(true)
+        },
+        onError: () => {
+            alert("error!!!")
+        }
+    })
+
+    const [addDiet, {loading: dietLoading, error: dietError}] = useMutation(ADD_DIET, {
+        onCompleted: () => {
+            console.log("diet added")
+        }
+    })
+    const [addHealth, {loading: healthLoading, error: healthError}] = useMutation(ADD_HEALTH)
+
     const handleDietCheck = ({ target }) => {
         setDiet(s => ({ ...s, [target.name]: !s[target.name] }));}
     
     const handleHealthCheck = ({ target }) => {
         setHealth(s => ({ ...s, [target.name]: !s[target.name] }));}
 
-    const handleSubmit = (event) => {
+
+    const handleRegister = (event) => {
         event.preventDefault()
         if (pass !== confpass) {
             alert("passwords don't match!")
+            return
         }
+        register()
+    }
+
+    const handleSubmit = (event) => {
+        Object.keys(diet).forEach(key => {
+            if (diet[key] === true) {
+                addDiet({
+                    variables: {
+                        input: {
+                            user: {
+                                id: userId,
+                            },
+                            restriction: key,
+                        },
+                    },
+                })
+            }
+        })
+        Object.keys(health).forEach(key => {
+            if (health[key] === true) {
+                addHealth({
+                    variables: {
+                        input: {
+                            user: {
+                                id: userId,
+                            },
+                            restriction: key,
+                        },
+                    },
+                })
+            }
+        })
+        history.push('/')
     }
 
     return (
         <Container>
-        <StyledForm onSubmit={handleSubmit} maxheight="730px">
+        <StyledForm onSubmit={handleSubmit}>
             <h1>Welcome to Recipe Central</h1>
+            {!registered ?
+            <>
             <InputBlock 
                 label="Email" 
                 type="text" 
@@ -73,6 +141,11 @@ const Register = () => {
                 onChangeF={(e) => setConfpass(e.target.value)} 
                 value={confpass} 
             />
+            <LoginRegisterButton disabled={ !buttonEnabled } onClick={ handleRegister }>Register</LoginRegisterButton>
+            <p>or <Link to="/login">Login</Link></p>
+            </>
+            :
+            <>
             <DietHealthContainer>
                 <DietHealth>
                     <h3>Dietary concerns:</h3>
@@ -96,8 +169,10 @@ const Register = () => {
                         />
                     ))}
                 </DietHealth>
-            </DietHealthContainer>
-            <LoginRegisterButton disabled={ !buttonEnabled } onClick={ handleSubmit }>Register</LoginRegisterButton>
+            </DietHealthContainer> 
+            <LoginRegisterButton onClick={ handleSubmit }>Submit</LoginRegisterButton>
+            </>
+            }
         </StyledForm>
         </Container>
     )

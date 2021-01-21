@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import theme from './theme'
 import client from './client'
