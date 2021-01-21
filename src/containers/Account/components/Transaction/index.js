@@ -1,24 +1,27 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react'
 
-const Transaction = () => {
-
-  return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Seller</th>
-            <th>Price</th>
-            <th>Transacted</th>
+const Transaction = ({ transactions }) => (
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Seller</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        { transactions.map((trans, i) => (
+          <tr key={i}>
+            <td>{trans.item.name}</td>
+            <td>{trans.item.seller.username}</td>
+            <td>{trans.item.price}</td>
           </tr>
-        </thead>
-        <tbody>
-          <tr></tr>
-        </tbody>
-      </table>
-    </div>
-  )
-}
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
 
 export default Transaction

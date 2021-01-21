@@ -11,7 +11,7 @@ const AddItem = () => {
   const reducer = (prevState, payload) => ({ ...prevState, ...payload })
   const [form, setForm] = useReducer(reducer, {
     description: '',
-    img: 'placeholder',
+    imgUrl: '',
     name: '',
     price: '',
     stock: '',
@@ -25,7 +25,7 @@ const AddItem = () => {
       input: {
         name: form.name,
         sellerId: '04b9f2f0-ea2c-472e-8e04-f43db84dba16', // placeholder ID
-        imgUrl: form.img,
+        imgUrl: form.imgUrl,
         description: form.description,
         price: form.price,
         stock: form.stock,
@@ -40,7 +40,7 @@ const AddItem = () => {
     <div>
       { form.errorMsg !== '' && <div>{form.errorMsg}</div> }
       <h1>Add Item to Shop</h1>
-      <Photo />
+      <Photo value={form.imgUrl} setValue={setForm} />
       <ItemDetails value={form} setValue={setForm} />
       <button type="button" onClick={createItem}>Post Item Listing</button>
     </div>

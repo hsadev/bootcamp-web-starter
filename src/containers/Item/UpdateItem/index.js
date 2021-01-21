@@ -76,7 +76,7 @@ const UpdateItem = () => {
     <div>
       { form.errorMsg !== '' && <div>{form.errorMsg}</div> }
       <h1>Update Item Details</h1>
-      <Photo />
+      <Photo value={form.imgUrl} setValue={setForm} />
       <ItemDetails
         value={form}
         setValue={setForm}

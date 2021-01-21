@@ -1,33 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { REMOVE_ITEM } from './graphql'
 
-const Shop = () => {
-  const id = 'placeholder'
+
+const Shop = ({ items }) => {
+  const history = useHistory()
+  const [id, setId] = useState('')
+  const [msg, setMsg] = useState('')
+  const [confirm, setConfirm] = useState(false)
+
+  const [deleteItem] = useMutation(REMOVE_ITEM, {
+    variables: { id },
+    onError: error => setMsg(error),
+    onCompleted: () => {
+      setMsg('')
+      setConfirm(false)
+    },
+  })
+
+  console.log(id)
+
   return (
     <div>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>Description</th>
             <th>Price</th>
             <th>Stock</th>
-            <th>Published</th>
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          { items.map(item => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{item.price}</td>
+              <td>{item.stock}</td>
+              <td>
+                <button type="button" onClick={() => history.push(`/update-item/${item.id}`)}>
+                  Update
+                </button>
+              </td>
+              <td>
+                <button type="button" onClick={() => { setId(item.id); setMsg('are you sure you want to remove this item?'); setConfirm(true) }}>
+                  x
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div>
-        <Link to='/add-item'>
-          <button type='type'>Add Item</button>
-        </Link>
-        <button type='type'>Remove Item</button>
-        <Link to={`/update-item/${id}`}>
-          <button type='type'>Update Item</button>
-        </Link>
+        <button type="button" onClick={() => history.push('/add-item')}>Add Item</button>
       </div>
+      { msg !== '' && <p>{msg}</p>}
+      { confirm && <button type="button" onClick={() => deleteItem()}>DELETE ITEM</button>}
     </div>
   )
 }
