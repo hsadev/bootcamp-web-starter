@@ -1,20 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { ListContainer, List, ListItem } from './styles'
 
-const SearchResults = () => {
-  const [results, setResults] = useState([
-    'placeholder 1',
-    'placeholder 2',
-    'placeholder 3',
-  ])
+const API_KEY = '5dc246545b634cc48af9fb7a2a5e609a'
+
+const SearchResults = ({ results }) => {
+  const history = useHistory()
+
+  const getRecipe = url => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${API_KEY}`)
+        const data = await res.json()
+        // console.log(data)
+        history.push(`/recipe/${data.id}`)
+      } catch (error) {
+        return <p>{error}</p>
+      }
+    }
+    fetchData()
+  }
 
   return (
     <>
-      <h2>Search Results</h2>
       <ListContainer>
         <List>
-          {results.map(result => (
-            <ListItem>{result}</ListItem>
+          {results.map(({ label, url, uri }) => (
+            <ListItem key={uri} onClick={() => getRecipe(url)}>{label}</ListItem>
           ))}
         </List>
       </ListContainer>
