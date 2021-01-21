@@ -7,7 +7,9 @@ import Transaction from './components/Transaction'
 import Shop from './components/Shop'
 
 const Account = () => {
-  const { data, loading, error } = useQuery(USER, {
+  const {
+    data, loading, error, refetch,
+  } = useQuery(USER, {
     variables: { id: '04b9f2f0-ea2c-472e-8e04-f43db84dba16' },
   })
 
@@ -29,7 +31,7 @@ const Account = () => {
       <h2>Transaction History</h2>
       <Transaction transactions={transactions} />
       <h2>My Shop</h2>
-      <Shop items={itemsSelling} />
+      <Shop items={itemsSelling} refetch={refetch} transactions={transactions} />
     </div>
   )
 }

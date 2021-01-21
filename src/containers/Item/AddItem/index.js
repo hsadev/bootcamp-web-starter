@@ -1,15 +1,12 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { useHistory } from 'react-router-dom'
 import { CREATE_ITEM } from './graphql'
 
 import ItemDetails from '../components/ItemDetails'
 import Photo from '../components/Photo'
 
 const AddItem = () => {
-  const history = useHistory()
-  const reducer = (prevState, payload) => ({ ...prevState, ...payload })
-  const [form, setForm] = useReducer(reducer, {
+  const initialState = {
     description: '',
     imgUrl: '',
     name: '',
@@ -17,8 +14,11 @@ const AddItem = () => {
     stock: '',
     tag: '',
     tags: [],
-    errorMsg: '',
-  })
+  }
+
+  const reducer = (prevState, payload) => ({ ...prevState, ...payload })
+  const [form, setForm] = useReducer(reducer, initialState)
+  const [msg, setMsg] = useState('')
 
   const [createItem] = useMutation(CREATE_ITEM, {
     variables: {
@@ -32,13 +32,16 @@ const AddItem = () => {
         tags: form.tags,
       },
     },
-    onCompleted: () => history.push('/account'),
-    onError: () => setForm({ errorMsg: 'Could not create listing. Please try again.' }),
+    onCompleted: () => {
+      setForm(initialState)
+      setMsg('Listing created!')
+    },
+    onError: () => setMsg('Could not create listing. Please try again.'),
   })
 
   return (
     <div>
-      { form.errorMsg !== '' && <div>{form.errorMsg}</div> }
+      { msg !== '' && <div>{msg}</div> }
       <h1>Add Item to Shop</h1>
       <Photo value={form.imgUrl} setValue={setForm} />
       <ItemDetails value={form} setValue={setForm} />

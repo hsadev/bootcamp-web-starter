@@ -12,7 +12,7 @@ const Transaction = ({ transactions }) => (
         </tr>
       </thead>
       <tbody>
-        { transactions.map((trans, i) => (
+        { transactions && transactions.map((trans, i) => (
           <tr key={i}>
             <td>{trans.item.name}</td>
             <td>{trans.item.seller.username}</td>

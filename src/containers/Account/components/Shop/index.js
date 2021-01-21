@@ -1,10 +1,12 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import { useMutation } from '@apollo/react-hooks'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { REMOVE_ITEM } from './graphql'
 
 
-const Shop = ({ items }) => {
+const Shop = ({ items, refetch }) => {
   const history = useHistory()
   const [id, setId] = useState('')
   const [msg, setMsg] = useState('')
@@ -14,8 +16,9 @@ const Shop = ({ items }) => {
     variables: { id },
     onError: error => setMsg(error),
     onCompleted: () => {
-      setMsg('')
+      refetch()
       setConfirm(false)
+      setMsg('')
     },
   })
 
@@ -30,23 +33,27 @@ const Shop = ({ items }) => {
           </tr>
         </thead>
         <tbody>
-          { items.map(item => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.price}</td>
-              <td>{item.stock}</td>
-              <td>
-                <button type="button" onClick={() => history.push(`/update-item/${item.id}`)}>
+          { items && items.map(item => {
+            if (!item.deleted) {
+              return (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>{item.stock}</td>
+                  <td>
+                    <button type="button" onClick={() => history.push(`/update-item/${item.id}`)}>
                   Update
-                </button>
-              </td>
-              <td>
-                <button type="button" onClick={() => { setId(item.id); setMsg('are you sure you want to remove this item?'); setConfirm(true) }}>
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" onClick={() => { setId(item.id); setMsg('are you sure you want to remove this item?'); setConfirm(true) }}>
                   x
-                </button>
-              </td>
-            </tr>
-          ))}
+                    </button>
+                  </td>
+                </tr>
+              )
+            }
+          })}
         </tbody>
       </table>
       <div>

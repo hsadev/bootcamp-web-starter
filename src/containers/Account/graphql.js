@@ -19,6 +19,7 @@ export const USER = gql`
         name
         price
         stock
+        deleted
       }
       money
     }
