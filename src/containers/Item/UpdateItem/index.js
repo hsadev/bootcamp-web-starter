@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import { UPDATE_ITEM, SPECIFIC_ITEM } from './graphql'
@@ -9,7 +9,7 @@ import Photo from '../components/Photo'
 
 
 const UpdateItem = () => {
-  // const itemId = useParams()
+  const itemId = useParams().id
   const history = useHistory()
   const reducer = (prevState, payload) => ({ ...prevState, ...payload })
   const [form, setForm] = useReducer(reducer, {
@@ -30,7 +30,7 @@ const UpdateItem = () => {
   }
   const [updateItem] = useMutation(UPDATE_ITEM, {
     variables: {
-      id: '5fa8591b-0baf-4f5c-b97c-a0049eb957ef',
+      id: itemId,
       input: {
         name: form.name,
         sellerId: 'bc420ebb-a6f1-4492-9fe6-6b2786e8a350',
@@ -46,7 +46,7 @@ const UpdateItem = () => {
   })
 
   const { loading, error } = useQuery(SPECIFIC_ITEM, {
-    variables: { id: '5fa8591b-0baf-4f5c-b97c-a0049eb957ef' },
+    variables: { id: itemId },
     onCompleted: data => {
       const {
         item: {
