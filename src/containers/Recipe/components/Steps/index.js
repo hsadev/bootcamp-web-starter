@@ -1,9 +1,9 @@
 import React from 'react'
-import { OList, ListItem } from '../../styles'
+import { OList, ListItem, Subtitle } from '../../styles'
 
 const Steps = ({ steps }) => (
   <>
-    <h2>Steps</h2>
+    <Subtitle>Steps</Subtitle>
     <OList>
       {steps.map(({ step, number }) => (
         <ListItem key={number}>{step}</ListItem>

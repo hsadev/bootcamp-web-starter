@@ -19,7 +19,6 @@ const SearchResults = ({ results }) => {
         } else {
           setError(true)
         }
-        // console.log(data)
       } catch (err) {
         return 'error'
       }

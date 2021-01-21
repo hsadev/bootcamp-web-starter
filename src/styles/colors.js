@@ -1,5 +1,0 @@
-export const BLUE = '#6699CC'
-export const YELLOW = '#FFF275'
-export const ORANGE = '#FF8C42'
-export const ORED = '#FF3C38'
-export const RED = '#A23E48'
