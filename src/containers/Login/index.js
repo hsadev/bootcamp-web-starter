@@ -5,7 +5,7 @@ import { LOGIN } from './graphql'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory, Link } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
@@ -19,28 +19,31 @@ const Login = () => {
         },
         onCompleted:({login: {token}}) => {
             console.log("user has been logged in")
+            setIsLoggedIn(true)
             localStorage.setItem('token', token)
         },
-        onError: () => {
-            alert("there has been an error line 25")
+        onError: (error) => {
+            let errorM = error.message.slice(14)
+            setErrorMessage(errorM)
+            console.log(error)
         }
     })
 
-    if (error) {
-        alert("there has been an error in logging u in line 30")
-    }
-
-    const handleLogin = (event) => {
-        login()
-        history.push('/')
+    async function handleLogin(event) {
+        event.preventDefault()
+        await login()
+        if (localStorage.getItem('token')) {
+            history.push('/')
+        }
     }
 
 
     return (
         <Container>
+        { localStorage.clear() }
         <StyledForm onSubmit={ login }>
             <h1>Welcome back to Recipe Central</h1>
-            <p>{errorMessage} </p>
+            <p> { errorMessage } </p>
             <InputBlock 
                 label="Email" 
                 type="text" 

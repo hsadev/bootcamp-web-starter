@@ -10,12 +10,13 @@ import { useHistory, Link } from 'react-router-dom'
 // diets: “balanced”, “high-protein”, “high-fiber”, “low-fat”, “low-carb”, “low-sodium”
 // health: dairy-free, egg-free, fish-free, gluten-free, kosher, peanut-free, shellfish-free, soy-free, tree-nut-free, vegan, vegetarian
 
-const Register = () => {
+const Register = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [confpass, setConfpass] = useState("")
     const [userId, setId] = useState("")
     const [registered, setRegistered] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
     const buttonEnabled = email.length > 0 && pass.length > 0 && confpass.length > 0
 
     const [diet, setDiet] = useState({
@@ -50,12 +51,14 @@ const Register = () => {
         },
         onCompleted:({register: {token, user: {id}}}) => {
             setId(id)
-            console.log("user has been registered")
             localStorage.setItem('token', token)
+            console.log("user has been registered")
             setRegistered(true)
         },
-        onError: () => {
-            alert("error!!!")
+        onError: (error) => {
+            let errorM = error.message.slice(14)
+            setErrorMessage(errorM)
+            console.log(errorM)
         }
     })
 
@@ -116,8 +119,10 @@ const Register = () => {
 
     return (
         <Container>
+        { localStorage.clear() }
         <StyledForm onSubmit={handleSubmit}>
             <h1>Welcome to Recipe Central</h1>
+            <p> { errorMessage } </p>
             {!registered ?
             <>
             <InputBlock 
