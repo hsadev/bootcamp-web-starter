@@ -10,7 +10,7 @@ export const List = styled.ul`
   padding: 0px;
 `
 
-export const ListItem = styled.div`
+export const ListItem = styled.button`
   font-size: 16px;
   border: 1px solid black;
   border-radius: 5px;
