@@ -19,8 +19,6 @@ const Shop = ({ items }) => {
     },
   })
 
-  console.log(id)
-
   return (
     <div>
       <table>
