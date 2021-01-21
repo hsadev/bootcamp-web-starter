@@ -16,28 +16,45 @@ const API_KEY = '5dc246545b634cc48af9fb7a2a5e609a'
 
 const Recipe = () => {
   const { id } = useParams()
+  const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [steps, setSteps] = useState([])
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
         const data = await res.json()
-        setIngredients(data.extendedIngredients)
-        setSteps(data.analyzedInstructions[0].steps)
-      } catch (error) {
-        return <p>{error}</p>
+
+        if (data.status !== 'failure') {
+          setTitle(data.title)
+          setIngredients(data.extendedIngredients)
+          setSteps(data.analyzedInstructions[0].steps)
+        } else {
+          setError(true)
+        }
+      } catch (err) {
+        return 'error'
       }
     }
     fetchData()
   }, [id])
 
+  if (error) {
+    return (
+      <>
+        <h1>THIS IS AN ERROR PAGE</h1>
+        <p>Unfortunately, because we are referencing multiple APIs, some recipes that may show up on the search results do not have recipe details available.</p>
+      </>
+    )
+  }
+
   return (
     <>
       <PageContainer>
         <LeftPanel>
-          <Title>Recipe Title Here</Title>
+          <Title>{title}</Title>
           <ButtonPanel>
             <Button>Favorite</Button>
             <Button>Tried</Button>
