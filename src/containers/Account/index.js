@@ -5,6 +5,7 @@ import { USER } from './graphql'
 import UserInfo from './components/UserInfo'
 import Transaction from './components/Transaction'
 import Shop from './components/Shop'
+import { Body } from './styles'
 
 const Account = () => {
   const {
@@ -25,14 +26,15 @@ const Account = () => {
   } = data
 
   return (
-    <div>
+    <Body>
+      <br />
       <h1>My Account</h1>
       <UserInfo username={username} money={money} />
       <h2>Transaction History</h2>
       <Transaction transactions={transactions} />
       <h2>My Shop</h2>
       <Shop items={itemsSelling} refetch={refetch} transactions={transactions} />
-    </div>
+    </Body>
   )
 }
 
