@@ -12,6 +12,13 @@ const ItemDetails = ({ value, setValue }) => {
       })
     }
   }
+
+  const removeTag = index => {
+    const newTagList = value.tags.slice()
+    newTagList.splice(index, 1)
+    setValue({ tags: newTagList })
+  }
+
   return (
     <div>
       <DetailInput
@@ -56,7 +63,12 @@ const ItemDetails = ({ value, setValue }) => {
         onKeyPress={addTag}
         placeholder="Add tags!"
       />
-      {value.tags.map((tag, i) => <p key={i}>{tag.tag}</p>)}
+      {value.tags.map((tag, i) => 
+        <p key={i}>{tag.tag}
+          <button type="button" onClick={() => removeTag(i)}>
+            x
+          </button>
+        </p>)}
       <br />
     </div>
   )

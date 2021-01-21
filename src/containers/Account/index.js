@@ -10,7 +10,7 @@ const Account = () => {
   const {
     data, loading, error, refetch,
   } = useQuery(USER, {
-    variables: { id: '04b9f2f0-ea2c-472e-8e04-f43db84dba16' },
+    variables: { id: 'bc420ebb-a6f1-4492-9fe6-6b2786e8a350' },
   })
 
   if (error) return 'Unable to load account info.'
