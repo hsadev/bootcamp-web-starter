@@ -15,42 +15,16 @@ import {
   IngredientList,
 } from './components/Search'
 
-const APP_ID = 'f1500858'
-const APP_KEY = '090812a8cbcf00e2831e04f48c0fa243'
-
 const Home = () => {
   const history = useHistory()
 
   const [query, setQuery] = useState('')
   const [ingredients, setIngredients] = useState([])
-
   const [url, setUrl] = useState('')
-  const [results, setResults] = useState([])
 
   // if (!localStorage.getItem('token')) {
   //   history.push('/login')
   // }
-
-  const filter = ({ hits }) => {
-    const filtered = []
-    hits.forEach(({ recipe }) => {
-      let ingJoined = ''
-      recipe.ingredients.forEach(({ text }) => { ingJoined += text })
-      if (ingredients.every(ingredient => ingJoined.includes(ingredient))) {
-        filtered.push(recipe)
-      }
-    })
-    setResults(filtered)
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`${url}&app_id=${APP_ID}&app_key=${APP_KEY}`)
-      const data = await res.json()
-      filter(data)
-    }
-    fetchData()
-  }, [url])
 
   const addIngredient = i => {
     setIngredients([...ingredients, i])
@@ -81,7 +55,7 @@ const Home = () => {
             </DescContainer>
           </SubContainer>
           <ResultContainer>
-            <SearchResults results={results} />
+            <SearchResults url={url} ingredients={ingredients} />
           </ResultContainer>
         </Container>
       </PageContainer>
