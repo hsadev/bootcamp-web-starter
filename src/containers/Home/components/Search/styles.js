@@ -9,5 +9,5 @@ export const Button = styled.button`
 
 export const SearchPanel = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
 `

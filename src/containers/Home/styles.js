@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const PageContainer = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -15,5 +16,23 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
+`
+
+export const SubContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const AddContainer = styled.div`
+  width: 35%;
+`
+
+export const DescContainer = styled.div`
+  width: 55%;
+`
+
+export const ResultContainer = styled.div`
+  width: 100%;
   border: 1px solid black;
 `
