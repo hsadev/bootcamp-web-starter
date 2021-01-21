@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const UPDATE_ITEM = gql`
-  mutation updateItem ($input: itemInput!) {
+  mutation updateItem ($input: ItemInput!) {
     updateItem (input: $input) {
       name
     }
@@ -15,9 +15,9 @@ export const SPECIFIC_ITEM = gql`
       imgUrl
       description
       price
-      #tags {
-        #tag
-      #}
+      tags {
+        tag
+      }
       stock
     }
   }
