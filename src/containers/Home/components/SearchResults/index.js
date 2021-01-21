@@ -69,8 +69,8 @@ const SearchResults = ({ url, ingredients }) => {
     <>
       <ListContainer>
         <List>
-          {results.map(({ label, url, uri }) => (
-            <ListItem key={uri} onClick={() => getRecipe(url)}>{label}</ListItem>
+          {results.map(({ label, url: u, uri }) => (
+            <ListItem key={uri} onClick={() => getRecipe(u)}>{label}</ListItem>
           ))}
         </List>
       </ListContainer>
