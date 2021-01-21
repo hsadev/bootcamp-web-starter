@@ -27,9 +27,9 @@ const Home = () => {
   const [url, setUrl] = useState('')
   const [results, setResults] = useState([])
 
-  // if (!localStorage.getItem('token')) {
-  //   history.push('/login')
-  // }
+  if (!localStorage.getItem('token')) {
+    history.push('/login')
+  }
 
   const filter = ({ hits }) => {
     const filtered = []

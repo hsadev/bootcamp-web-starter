@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div `
     display: grid;
     place-items: center;
+    height: 100vh;
 `
 
 export const StyledForm = styled.form `
@@ -10,11 +11,11 @@ export const StyledForm = styled.form `
     flex-direction: column;
     align-items: center;
     width: clamp(600px, 70vw, 70vw);
-    height: clamp(${ props => props.maxheight }, 100vh, 100vh);
+    height: 90%;
     color: black;
     background-color: #fff275;
     font-family: sans-serif;
-    padding-top: 30px;
+    padding-top: 5%;
 `
 
 export const DietHealthContainer = styled.div `
