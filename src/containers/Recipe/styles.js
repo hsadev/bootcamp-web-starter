@@ -13,6 +13,7 @@ export const Button = styled.button`
 `
 
 export const ButtonPanel = styled.div`
+  margin: 10px 0px 20px 0px;
 `
 
 export const ListItem = styled.li`
@@ -33,7 +34,7 @@ export const Title = styled.h1`
 
 export const IngredientsContainer = styled.div`
   border: 1px solid black;
-  width: 500px;
+  border-radius: 5px;
   padding: 20px;
 `
 
