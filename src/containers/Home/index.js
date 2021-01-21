@@ -76,7 +76,7 @@ const Home = () => {
               <IngredientList ingredients={ingredients} />
             </AddContainer>
             <DescContainer>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat consectetur, quo reiciendis atque est vel repellendus veniam voluptatum facere incidunt a eaque in adipisci consequatur laborum consequuntur quas voluptas fugiat ad quod, temporibus sit nihil. Nihil illo quae dolore sequi ratione repudiandae aliquam iste vel iure eveniet, error accusamus deserunt?</p>
+              <p>Recipe Central allows users to search for recipes compatible with their dietary needs by entering the recipe title or related keywords, as well as necessary ingredients (optional). To conduct a search, enter recipe keywords and, if preferred, add ingredients before clicking submit.</p>
               <button onClick={processSubmit}>Submit</button>
             </DescContainer>
           </SubContainer>

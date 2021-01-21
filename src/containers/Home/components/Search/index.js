@@ -1,10 +1,18 @@
 import React, { useState, useRef } from 'react'
-import { Input, Button, SearchPanel } from './styles'
+import {
+  Title,
+  Subtitle,
+  Label,
+  Input,
+  Button,
+  SearchPanel
+} from './styles'
 
 export const SearchBar = ({ setQuery }) => (
   <>
-    <h1>Search for recipe by title:</h1>
+    <Title>RECIPE SEARCH</Title>
     <SearchPanel>
+      <Label>Keywords</Label>
       <Input onChange={e => setQuery(e.target.value)} />
     </SearchPanel>
   </>
@@ -15,7 +23,7 @@ export const IngredientAdder = ({ addIngredient }) => {
 
   return (
     <>
-      <h1>add ing</h1>
+      <Subtitle>ADD INGREDIENTS</Subtitle>
       <SearchPanel>
         <Input onChange={e => setIng(e.target.value)} />
         <Button onClick={() => addIngredient(ing)}>add</Button>

@@ -3,20 +3,17 @@ import styled from 'styled-components'
 export const PageContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  margin: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  background-color: ${props => props.theme.colors.yellow};
 `
 
 export const Container = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  margin-top: 75px;
 `
 
 export const SubContainer = styled.div`
@@ -29,10 +26,14 @@ export const AddContainer = styled.div`
 `
 
 export const DescContainer = styled.div`
+  @import url('${props => props.theme.fontSource}');
+
+  font-family: ${props => props.theme.fonts.body.fontFamily};
   width: 55%;
 `
 
 export const ResultContainer = styled.div`
   width: 100%;
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
 `

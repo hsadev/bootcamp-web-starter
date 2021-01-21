@@ -1,9 +1,9 @@
 import React from 'react'
-import { UList, ListItem } from '../../styles'
+import { UList, ListItem, Subtitle } from '../../styles'
 
 const Ingredients = ({ ingredients }) => (
   <>
-    <h2>Ingredients</h2>
+    <Subtitle>Ingredients</Subtitle>
     <UList>
       {ingredients.map(({ id, originalString }) => (
         <ListItem key={id}>{originalString}</ListItem>
