@@ -28,6 +28,7 @@ const Home = () => {
   const [results, setResults] = useState([])
 
   if (!localStorage.getItem('token')) {
+    console.log("nope", localStorage.getItem('token'))
     history.push('/login')
   }
 
