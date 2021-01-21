@@ -7,7 +7,7 @@ const ItemDetails = ({ value, setValue }) => {
   const addTag = e => {
     if (e.key === 'Enter' && e.target.value) {
       setValue({
-        tags: value.tags.concat(value.tag),
+        tags: value.tags.concat({ tag: value.tag }),
         tag: '',
       })
     }
@@ -56,7 +56,7 @@ const ItemDetails = ({ value, setValue }) => {
         onKeyPress={addTag}
         placeholder="Add tags!"
       />
-      {value.tags.map((tag, i) => <p key={i}>{tag}</p>)}
+      {value.tags.map((tag, i) => <p key={i}>{tag.tag}</p>)}
       <br />
     </div>
   )

@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react'
 // import { useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useHistory } from 'react-router-dom'
 import { UPDATE_ITEM, SPECIFIC_ITEM } from './graphql'
 
 import ItemDetails from '../components/ItemDetails'
@@ -9,30 +10,39 @@ import Photo from '../components/Photo'
 
 const UpdateItem = () => {
   // const itemId = useParams()
-
+  const history = useHistory()
   const reducer = (prevState, payload) => ({ ...prevState, ...payload })
   const [form, setForm] = useReducer(reducer, {
     description: '',
     name: '',
-    img: '',
+    imgUrl: '',
     price: '',
     stock: '',
     tag: '',
     tags: [],
+    errorMsg: '',
   })
-
+  // necessary to strip __typename field
+  const getTags = tags => {
+    const tagList = []
+    tags.map(({ tag }) => tagList.push({ tag }))
+    return tagList
+  }
   const [updateItem] = useMutation(UPDATE_ITEM, {
     variables: {
+      id: '5fa8591b-0baf-4f5c-b97c-a0049eb957ef',
       input: {
         name: form.name,
-        sellerId: '04b9f2f0-ea2c-472e-8e04-f43db84dba16',
-        imgUrl: form.img,
+        sellerId: 'bc420ebb-a6f1-4492-9fe6-6b2786e8a350',
+        imgUrl: form.imgUrl,
         description: form.description,
         price: form.price,
         stock: form.stock,
-        tags: form.tags,
+        tags: [{ tag: 'hello' }, { tag: 'hey' }],
       },
     },
+    onError: () => setForm({ errorMsg: 'Could not update listing. Please try again.' }),
+    onCompleted: () => history.push('/account'),
   })
 
   const { loading, error } = useQuery(SPECIFIC_ITEM, {
@@ -45,31 +55,33 @@ const UpdateItem = () => {
           description,
           price,
           stock,
+          tags,
         },
       } = data
       setForm({
         description,
         name,
-        img: imgUrl,
-        price: `${price}`,
-        stock: `${stock}`,
-        // tags,
+        imgUrl,
+        price,
+        stock,
+        tags: getTags(tags),
       })
     },
   })
 
   if (loading) return 'Loading...'
   if (error) return 'There was an error.'
+
   return (
     <div>
+      { form.errorMsg !== '' && <div>{form.errorMsg}</div> }
       <h1>Update Item Details</h1>
       <Photo />
       <ItemDetails
         value={form}
         setValue={setForm}
-        msg="Update Item Listing"
-        action={updateItem}
       />
+      <button type="button" onClick={updateItem}>Update Item Listing</button>
     </div>
   )
 }
