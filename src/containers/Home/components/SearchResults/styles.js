@@ -11,9 +11,14 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.button`
+  width: 100%;
   font-size: 16px;
   border: 1px solid black;
   border-radius: 5px;
   padding: 15px;
   margin: 10px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.blue};
+  }
 `

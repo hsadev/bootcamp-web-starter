@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Ingredients from './components/Ingredients'
 import Steps from './components/Steps'
+import { Bookmark, Check } from './components/Icons'
 import {
   Title,
   Button,
@@ -39,7 +40,7 @@ const Recipe = () => {
       }
     }
     fetchData()
-  }, [id])
+  }, [])
 
   if (error) {
     return (
@@ -56,8 +57,8 @@ const Recipe = () => {
         <LeftPanel>
           <Title>{title}</Title>
           <ButtonPanel>
-            <Button>Favorite</Button>
-            <Button>Tried</Button>
+            <Bookmark />
+            <Check />
           </ButtonPanel>
           <IngredientsContainer>
             <Ingredients ingredients={ingredients} />
