@@ -12,6 +12,7 @@ const Navbar = () => {
     {/* {isLoggedIn 
     ? 
     <> */}
+      <p>Marketplace</p>
       <Link to="/">Home</Link>
       <Link to="/cart">My Cart</Link>
       <Link to="/account">My Account</Link>
