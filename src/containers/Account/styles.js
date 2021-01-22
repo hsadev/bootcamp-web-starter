@@ -6,6 +6,7 @@ export const Body = styled.div`
   min-width: 100vw;
   background: linear-gradient(174.48deg, #9DC2FF 15.79%, #281AC8 116.76%);
 `
+
 export const Container = styled.div`
   background: #FFFFFF;
   border-radius: 35px;
@@ -39,7 +40,6 @@ export const Table = styled.table`
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #adadad;
-    color: #262626;
+    background-color: #9DC2FF;
   }
 `

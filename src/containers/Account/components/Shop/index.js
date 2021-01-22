@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { REMOVE_ITEM } from './graphql'
 
 import { Table, Container } from '../../styles'
-import { Delete } from './styles'
+import { Delete, Update, StyledButton, Add } from './styles'
 
 
 const Shop = ({ items, refetch }) => {
@@ -46,9 +46,9 @@ const Shop = ({ items, refetch }) => {
                   <td>{`$${item.price}`}</td>
                   <td>{item.stock}</td>
                   <td>
-                    <button type="button" onClick={() => history.push(`/update-item/${item.id}`)}>
+                    <Update type="button" onClick={() => history.push(`/update-item/${item.id}`)}>
                   Update
-                    </button>
+                    </Update>
                   </td>
                   <td>
                     <Delete type="button" onClick={() => { setId(item.id); setMsg('are you sure you want to remove this item?'); setConfirm(true) }}>
@@ -61,12 +61,12 @@ const Shop = ({ items, refetch }) => {
           })}
         </tbody>
       </Table>
-      <button type="button" onClick={() => history.push('/add-item')}>Add Item</button>
+      <Add type="button" onClick={() => history.push('/add-item')}>Add Item</Add>
       { msg !== '' && <p>{msg}</p>}
       { confirm && 
       <div>
-        <button type="button" onClick={() => deleteItem()}>YES</button>
-        <button 
+        <StyledButton type="button" onClick={() => deleteItem()}>YES</StyledButton>
+        <StyledButton 
           type='button' 
           onClick={() => { 
             setMsg('')
@@ -74,7 +74,7 @@ const Shop = ({ items, refetch }) => {
           }}
         >
           NO
-        </button>
+        </StyledButton>
       </div>
       }
     </Container>

@@ -11,11 +11,12 @@ const Account = () => {
   const {
     data, loading, error, refetch,
   } = useQuery(USER, {
-    variables: { id: 'bc420ebb-a6f1-4492-9fe6-6b2786e8a350' },
+    variables: { id: '5b5ead2b-490d-4b63-91a5-413eb67ec209' },
+    partialRefetch: true,
   })
 
-  if (error) return 'Unable to load account info.'
-  if (loading) return 'Loading...'
+  if (error) return (<Body>Unable to load account info.</Body>)
+  if (loading) return (<Body>Loading...</Body>)
   const {
     user: {
       username,
@@ -34,6 +35,7 @@ const Account = () => {
       <Transaction transactions={transactions} />
       <h2>My Shop</h2>
       <Shop items={itemsSelling} refetch={refetch} transactions={transactions} />
+      <br />
     </Body>
   )
 }

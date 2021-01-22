@@ -2,8 +2,9 @@
 import React from 'react'
 
 import DetailInput from './components/DetailInput'
+import { Container, Delete, StyledButton, StyledInput, Tag, Tags } from './styles'
 
-const ItemDetails = ({ value, setValue }) => {
+const ItemDetails = ({ action, msg, value, setValue }) => {
   const addTag = e => {
     if (e.key === 'Enter' && e.target.value) {
       setValue({
@@ -20,19 +21,19 @@ const ItemDetails = ({ value, setValue }) => {
   }
 
   return (
-    <div>
+    <Container>
       <DetailInput
         name="name"
         value={value}
         setValue={setValue}
-        placeholder="item name"
+        placeholder="Item name"
       />
       <br />
       <DetailInput
         name="description"
         value={value}
         setValue={setValue}
-        placeholder="item description"
+        placeholder="Description"
       />
       <br />
       <DetailInput
@@ -40,10 +41,9 @@ const ItemDetails = ({ value, setValue }) => {
         type="number"
         min="1"
         max="1000"
-        label="Number of items to sell "
+        label="Number of items to sell&emsp;"
         value={value}
         setValue={setValue}
-        placeholder="stock"
       />
       <br />
       <DetailInput
@@ -51,26 +51,30 @@ const ItemDetails = ({ value, setValue }) => {
         type="number"
         min="0"
         max="10000"
-        label="Price of one item "
+        label="Price of one item&emsp;"
         value={value}
         setValue={setValue}
-        placeholder="price"
+        placeholder="$0.00"
       />
       <br />
-      <input
+      <StyledInput
         value={value.tag}
         onChange={e => setValue({ tag: e.target.value })}
         onKeyPress={addTag}
         placeholder="Add tags!"
       />
-      {value.tags.map((tag, i) => 
-        <p key={i}>{tag.tag}
-          <button type="button" onClick={() => removeTag(i)}>
-            x
-          </button>
-        </p>)}
+      <Tags>
+        {value.tags.map((tag, i) => 
+          <Tag key={i}>{tag.tag}&emsp;
+            <Delete type="button" onClick={() => removeTag(i)}>
+              x
+            </Delete>
+          </Tag>
+          )}
+      </Tags>
       <br />
-    </div>
+      <StyledButton type="button" onClick={action}>{msg}</StyledButton>
+    </Container>
   )
 }
 
