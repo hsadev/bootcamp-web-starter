@@ -59,7 +59,7 @@ const Search = () => {
                         <p>price: ${item.price}</p>
                         <p>stock: {item.stock}</p>
                         <button value={item.id} onClick={e => setItemId(e.target.value)}>Add to Cart</button>
-                        <button onClick={decrementStock}>Stock</button>
+                        {/* <button onClick={decrementStock}>Stock</button> */}
                     </div>
                 ))}
             </ItemContainer>
