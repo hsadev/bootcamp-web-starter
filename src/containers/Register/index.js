@@ -127,7 +127,7 @@ const ValidEmail= () => {
           onChange={e => setZip(e.target.value)}
           value={zip}
         />
-        <Button onClick={register, }>Register</Button>
+        <Button onClick={register}>Register</Button>
         <Text>Already a Member?&nbsp;
             <Link to="/login">Log In</Link>
         </Text>
