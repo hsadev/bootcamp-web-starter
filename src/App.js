@@ -13,6 +13,8 @@ import AddItem from './containers/Item/AddItem'
 import UpdateItem from './containers/Item/UpdateItem'
 import Navbar from './containers/Navbar'
 import Search from './containers/Search'
+import Login from './containers/Login'
+import Register from './containers/Register'
 
 const App = () => (
   <Router>
@@ -27,7 +29,9 @@ const App = () => (
             <Route path="/change-password" component={ChangePassword} />
             <Route path="/update-item/:id" component={UpdateItem} />
             <Route path="/search/:id" component={Search} children={<Search />} />
-            <Route path="/" component={Home} />
+            <Route path="/home" component={Home} />
+            <Route path="/register" component={Register} />
+            <Route path="/" component={Login} />
           </Switch>
         </div>
       </ApolloProvider>
