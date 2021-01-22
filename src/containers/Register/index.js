@@ -39,8 +39,9 @@ const Register = () => {
           country
       }
     },
-    onCompleted: ({ register: { token } }) => {
+    onCompleted: ({ register: { token, user: { id } } }) => {
       localStorage.setItem('token', token)
+      localStorage.setItem('userId', id)
       history.push('/home')
     },
 })
@@ -127,7 +128,7 @@ const ValidEmail= () => {
           onChange={e => setZip(e.target.value)}
           value={zip}
         />
-        <Button onClick={register, }>Register</Button>
+        <Button onClick={register}>Register</Button>
         <Text>Already a Member?&nbsp;
             <Link to="/login">Log In</Link>
         </Text>
