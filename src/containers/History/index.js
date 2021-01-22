@@ -26,11 +26,11 @@ const History = () => {
                             <THLink>Link</THLink>
                         </TRHeader>
 
-                        {!data ? "You need to log in!" : data.userViewer.bookmarks.map(bookmark => (
+                        {!data ? "You need to log in!" : data.userViewer.triedRecipes.map(tried => (
                             <>
                                 <Tr>
-                                    <TDDate>{bookmark.createdAt}</TDDate>
-                                    <TDLink><a href={bookmark.link}>{bookmark.link}</a></TDLink>
+                                    <TDDate>{tried.createdAt}</TDDate>
+                                    <TDLink><a href={tried.link}>{tried.link}</a></TDLink>
                                 </Tr>
                             </>
                         ))}

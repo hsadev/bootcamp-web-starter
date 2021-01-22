@@ -9,6 +9,8 @@ export const USER_VIEWER = gql`
             password
             triedRecipes {
                 link
+                createdAt
+                updatedAt
             }
             bookmarks {
                 link
