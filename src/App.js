@@ -11,6 +11,7 @@ import Recipe from './containers/Recipe'
 import NavBar from './components/NavBar/NavBar'
 
 import History from './containers/History'
+import Favorites from './containers/Favorites'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -31,7 +32,7 @@ const App = () => {
               <Route path="/recipe/:id" component={Recipe} />
 
               <Route path="/history" component = {History} />
-
+              <Route path="/favorites" component = {Favorites} />
 
               <Route path="/" component={Home} />
             </Switch>
