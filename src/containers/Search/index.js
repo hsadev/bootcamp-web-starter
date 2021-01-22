@@ -4,6 +4,19 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import { Container, Row, ItemContainer } from './styles'
 import { ALL_ITEMS, ADD_ITEM, DECREMENT_STOCK } from './graphql'
 
+// const jwt = require('jsonwebtoken')
+// const token = localStorage.getItem('token')
+// const decodeToken = token => {
+//     if (!token) {
+//         history.push('/login')
+//     }
+//     try {
+//         return jwt.verify(token, config.tokenSecret)
+//     } catch (error) {
+//         history.push('/login')
+//     }
+// }
+
 
 const Search = () => {
     
@@ -11,9 +24,8 @@ const Search = () => {
     const { id } = useParams()
     const[item, setItem] = useState()
     const[itemId, setItemId] = useState()
-    console.log(itemId)
     
-    const { data, loading, error } = useQuery(ALL_ITEMS, {
+    const { data, loading, error, refetch } = useQuery(ALL_ITEMS, {
         variables: { 
             input: id,
         },
@@ -23,7 +35,7 @@ const Search = () => {
         throw new Error('query failed')
     }
 
-    // const [addItem, error, loading] = useMutation(ADD_ITEM, {
+    // const [addCartItem, error, loading] = useMutation(ADD_ITEM, {
     //     variables: {
     //       input: {
     //         userId: ?,
@@ -32,12 +44,12 @@ const Search = () => {
     //     },
     //   })
 
-    // const [decrementStock, { error: addItemError, loading: addItemLoading }] = useMutation(DECREMENT_STOCK, {
-    //     variables: {
-    //     id: itemId
-    //     },
-    // })
-
+    const [decrementStock, { error: addItemError, loading: addItemLoading }] = useMutation(DECREMENT_STOCK, {
+        variables: {
+        id: itemId
+        },
+        onCompleted: () => refetch()
+    })
 
     return (
         <>
@@ -58,8 +70,9 @@ const Search = () => {
                         <p>tags: {item.tags.map(tag => { return `${tag.tag} `})}</p>
                         <p>price: ${item.price}</p>
                         <p>stock: {item.stock}</p>
-                        <button value={item.id} onClick={e => setItemId(e.target.value)}>Add to Cart</button>
-                        {/* <button onClick={decrementStock}>Stock</button> */}
+                        <button value={item.id} onMouseEnter={e => setItemId(e.target.value)} onMouseLeave={() => setItemId('')} onClick={decrementStock}>Add to Cart</button>
+
+                        
                     </div>
                 ))}
             </ItemContainer>
